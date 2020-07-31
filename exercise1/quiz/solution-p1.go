@@ -36,7 +36,6 @@ func PromptQuestion(num int, line []string) string {
 	a := line[1]
 	fmt.Printf("\nProblem #%d What is %s = ",num, q)
 
-	//return fmt.Sprintf("You put: %s,  I want: %s\n", inp, a)
 	return a
 }
 
@@ -58,40 +57,33 @@ func EvalAnswer(myans string, ans string) bool {
 
 
 func Grade(c int, t int) {
-	fmt.Printf("Questions correct: %d, Total Questions: %d", c, t)
+	eval := fmt.Sprintf("Questions correct: %d, Total Questions: %d", c, t)
+	fmt.Println(eval)
 }
-// Get next question
-
-// Evaluate answer
-
-// Reach Limit
-
-// Report grade
 
 func main(){
+	// open csv
 	inf, err := LoadCSV("problems.csv")
 	if err != nil {
 		fmt.Print(err)
+		os.Exit(1)
 	}
-	q, err := NextQuestion(inf)
-	if err != nil {
-		fmt.Print(err)
-	}
-	a := PromptQuestion(1, q)
-	// fmt.Print(a)
-	myans := GetAnswer()
-	//fmt.Print(myans)
-	c := EvalAnswer(myans, a)
-	fmt.Println(c)
-
-	// Get limit of questions
-	// change this loop to limit
-	// total := options.limit
 	crct := 0
 	for i := 1; i <= 10; i++ {
-		fmt.Println(i)
-
+		q, err := NextQuestion(inf)
+		if err != nil {
+			fmt.Println(err)
+		}
+		a := PromptQuestion(i, q)
+		myans := GetAnswer()
+		c := EvalAnswer(myans, a)
+		if c == true {
+			crct += 1
+		}
 	}
+	// Replace t with total from option flags
+	Grade(crct, 10)
+
 
 
 }
