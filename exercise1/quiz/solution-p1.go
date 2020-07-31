@@ -19,13 +19,28 @@ func LoadCSV(f string) (*csv.Reader, error) {
 }
 
 // Read/Get next line of csv
-//func NextQuestion(csv io.Reader)  []string {
-//	q := csv.Read()
-//	return q
+func NextQuestion(csv *csv.Reader)  ([]string, error) {
+	q, err := csv.Read()
+	if err != nil {
+		return nil, err
+	}
+	return q, err
 
-//}
+}
 
-// Get Question from CSV
+// Prompt Question, know the answer
+
+func PromptQuestion(line []string) string {
+	q := line[0]
+	a := line[1]
+	fmt.Printf("\n%s = ", q)
+	var inp string
+	i, err := fmt.Scanln(&inp)
+	if err != nil {
+		fmt.Print("UHHHHH")
+	}
+	return fmt.Sprintf("You put: %s,  I want: %s\n", i, a)
+}
 
 // Get limit of questions
 
@@ -44,6 +59,11 @@ func main(){
 	if err != nil {
 		fmt.Print(err)
 	}
-	fmt.Print(inf.Read())
+	q, err := NextQuestion(inf)
+	if err != nil {
+		fmt.Print(err)
+	}
+	a := PromptQuestion(q)
+	fmt.Print(a)
 
 }
