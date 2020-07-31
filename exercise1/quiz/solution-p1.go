@@ -69,6 +69,8 @@ func main(){
 		os.Exit(1)
 	}
 	crct := 0
+	// Uses Limit as a max for questions
+	// Hardcode as 10 for proof of concept.
 	for i := 1; i <= 10; i++ {
 		q, err := NextQuestion(inf)
 		if err != nil {
