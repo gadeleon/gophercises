@@ -1,27 +1,33 @@
-package quiz
+package main
 
 import (
 	"encoding/csv"
-	"io"
+	"fmt"
+	"os"
 )
 
-// Load into CSV
+// Load filename f into CSV reader
 
-func LoadCSV(r io.Reader) *Reader {
-	csv := csv.NewReader(r)
+func LoadCSV(f string) (*csv.Reader, error) {
+	inf, err := os.Open(f)
+	if err != nil {
+		return nil, err
+	}
+	csvf := csv.NewReader(inf)
 
-	return csv
+	return csvf, err
 }
 
-// Read/Get next question
-func NextQuestion(csv io.Reader) []string {
-	return csv.Read()
-}
+// Read/Get next line of csv
+//func NextQuestion(csv io.Reader)  []string {
+//	q := csv.Read()
+//	return q
 
+//}
+
+// Get Question from CSV
 
 // Get limit of questions
-
-// Ask question
 
 // Read input, log if correct
 
@@ -32,3 +38,12 @@ func NextQuestion(csv io.Reader) []string {
 // Reach Limit
 
 // Report grade
+
+func main(){
+	inf, err := LoadCSV("problems.csv")
+	if err != nil {
+		fmt.Print(err)
+	}
+	fmt.Print(inf.Read())
+
+}
