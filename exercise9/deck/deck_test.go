@@ -4,15 +4,17 @@ import (
 	"testing"
 )
 
-// Test for New
+
 func TestNewDeckLen(t *testing.T) {
-	d := New(2)
+	d := New()
 	b:= len(d)
 	if b != 53 {
-		t.Error(("ham"))
+		t.Errorf("Got %d, want 53", b)
 	}
 }
 
-// Length of []Card is 53
-// 13 of each Suite in the Deck
-// 1 Joker in the Deck
+// Test 13 of each suite
+
+// Test for a joker
+
+
