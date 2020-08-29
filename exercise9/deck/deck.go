@@ -16,7 +16,7 @@ type Card struct {
 
 // Create a func New to make a stroebought deck o' cards.
 // 52 cards + 1 joker in []card
-func new() []Card {
+func New(numberOfDecks int) []Card {
 	var c []Card
 	return c
 }
