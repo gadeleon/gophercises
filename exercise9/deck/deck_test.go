@@ -1,14 +1,14 @@
-package main
+package deck
 
 import (
-	// "deck.deck"
 	"fmt"
 	"testing"
 )
 
 // Test for New
 func TestNewDeckLen(t *testing.T) {
-	d := deck.new()
+	d := new()
+	len(d) == 53
 }
 
 // Length of []Card is 53
