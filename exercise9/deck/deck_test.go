@@ -31,7 +31,10 @@ func TestNewDeckSuite(t *testing.T) {
 	if c["C"] != 13 {
 		t.Errorf("Got %d Clubs, want 13", c["C"])
 	}
-	if c["J"] != 2 {
-		t.Errorf("Got %d Jokers, want 2", c["J"])
+	if c["J"] != 1 {
+		t.Errorf("Got %d JOKER, want 1", c["J"])
+	}
+	if c["j"] != 1 {
+		t.Errorf("Got %d joker, want 1", c["J"])
 	}
 }
