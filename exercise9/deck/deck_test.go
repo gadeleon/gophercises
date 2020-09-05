@@ -13,9 +13,8 @@ func TestNewDeckLen(t *testing.T) {
 	}
 }
 
-// Test 13 of each suite
+// Test 13 of each suite & 2 Jokers
 func TestNewDeckSuite(t *testing.T){
-	// okay
 	d := New()
 	c := make(map[string]int, len(d))
 	for _, j := range d {
@@ -33,8 +32,9 @@ func TestNewDeckSuite(t *testing.T){
 	if c["C"] != 13 {
 		t.Errorf("Got %d Clubs, want 13", c["C"])
 	}
+	if c["J"] != 2 {
+		t.Errorf("Got %d Jokers, want 2", c["J"])
+	}
 }
-
-// Test for a joker
 
 
