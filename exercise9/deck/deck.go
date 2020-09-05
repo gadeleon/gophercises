@@ -41,6 +41,9 @@ func New() []Card {
 		// c[s]= card{id:11}
 
 	}
+	c = append(c, Card{suite: "j", id: "0", value: 0})
+	c = append(c, Card{suite: "J", id: "0", value: 0})
+
 
 	return c
 }
