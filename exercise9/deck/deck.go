@@ -18,20 +18,22 @@ type Card struct {
 // Value
 
 // Create a func New to make a stroebought deck o' cards.
-// 52 cards + 1 joker in []card
+// 52 cards + 2 joker in []card
 func New() []Card {
 	var c []Card
 	suites := []string{"H", "S", "C", "D"}
-	//loop 13, one for each suite
 	for _, s := range suites {
-		// Add numbered cards
-		for i := 0; i > 10; i++ {
+		// Add Ace - 10
+		for i := 0; i < 10; i++ {
 			c = append(c, Card{suite: s, id: fmt.Sprint(i), value: i})
-			println(c)
 		}
-		// c[s{suite
-		// 	id i
-		// 	value i }],k,q,
+		// Jack
+		c = append(c, Card{suite: s, id: "11", value: 11})
+		// Queen
+		c = append(c, Card{suite: s, id: "12", value: 12})
+		// King
+		c = append(c, Card{suite: s, id: "13", value: 13})
+
 
 		// }
 		// c[s]= card{id:11}
