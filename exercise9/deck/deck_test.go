@@ -4,17 +4,16 @@ import (
 	"testing"
 )
 
-
 func TestNewDeckLen(t *testing.T) {
 	d := New()
-	b:= len(d)
-	if b != 53 {
-		t.Errorf("Got %d, want 53", b)
+	b := len(d)
+	if b != 54 {
+		t.Errorf("Got %d, want 54", b)
 	}
 }
 
 // Test 13 of each suite & 2 Jokers
-func TestNewDeckSuite(t *testing.T){
+func TestNewDeckSuite(t *testing.T) {
 	d := New()
 	c := make(map[string]int, len(d))
 	for _, j := range d {
@@ -36,5 +35,3 @@ func TestNewDeckSuite(t *testing.T){
 		t.Errorf("Got %d Jokers, want 2", c["J"])
 	}
 }
-
-
