@@ -12,13 +12,14 @@ type Card struct {
 	value int
 }
 
-// What's in a CARD
-// Suite
-// ID
-// Value
+type Deck struct {
+	deck []Card
+}
+
 
 // Create a func New to make a stroebought deck o' cards.
 // 52 cards + 2 joker in []card
+// FIXME: Return Deck struct
 func New() []Card {
 	var c []Card
 	suites := []string{"H", "S", "C", "D"}
@@ -47,3 +48,9 @@ func New() []Card {
 
 	return c
 }
+// TODO: Update New() to return a deck rather than just dem cards
+// TODO: Add Sort Deck Method
+// func (d *Deck) Sort() Deck {}
+// TODO: "A default comparison function that can
+// be used with the sorting option." (Wat?)
+// TODO: Add Shuffle Method
