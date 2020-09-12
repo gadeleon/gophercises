@@ -4,17 +4,20 @@ import (
 	"testing"
 )
 
-func TestNewDeckLen(t *testing.T) {
-	d := New()
-	b := len(d)
-	if b != 54 {
-		t.Errorf("Got %d, want 54", b)
-	}
-}
 
-// Test 13 of each suite & 2 Jokers
+
+//// Test creation of arbitrary count of cards, normal deck
+//// Future proofing for different sizes
+//func TestNewDeckLength(t *testing.T) {
+//	d := NewStandard(54)
+//	if len(d.deck) != d.count {
+//		t.Errorf("Got %d card length, expected %d", len(d.deck), d.count)
+//	}
+//}
+
+// Test 13 of each suite & 2 Jokers,  AKA normal deck
 func TestNewDeckSuite(t *testing.T) {
-	d := New()
+	var d = NewStandard()
 	c := make(map[string]int, len(d))
 	for _, j := range d {
 		c[j.suite]++

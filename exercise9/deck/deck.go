@@ -14,13 +14,14 @@ type Card struct {
 
 type Deck struct {
 	deck []Card
+
 }
 
 
 // Create a func New to make a stroebought deck o' cards.
 // 52 cards + 2 joker in []card
 // FIXME: Return Deck struct
-func New() []Card {
+func NewStandard() []Card {
 	var c []Card
 	suites := []string{"H", "S", "C", "D"}
 	for _, s := range suites {
@@ -45,6 +46,8 @@ func New() []Card {
 	c = append(c, Card{suite: "j", id: "0", value: 0})
 	c = append(c, Card{suite: "J", id: "0", value: 0})
 
+	//var d Deck
+	//d = Deck{c}
 
 	return c
 }
