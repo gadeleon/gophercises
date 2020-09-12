@@ -20,15 +20,16 @@ func New(n int) Deck {
 
 	// Create a new standard deck
 	var d Deck
+
+
 	for i := 0; i < n; i++ {
 		c := NewStandard()
-		d.deck = append(c)
+		d.deck = append(d.deck, c...)
 	}
-
 	return d
 }
 
-// Create a func New to make a stroebought deck o' cards.
+// Create a func New to make a store-bought deck o' cards.
 // 52 cards + 2 joker in []card
 // FIXME: Return Deck struct
 func NewStandard() []Card {

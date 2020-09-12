@@ -10,8 +10,6 @@ func TestNew(t *testing.T) {
 	for i := 0; i < 4; i++ {
 		d := New(i)
 		if len(d.deck) != (54 * i) {
-			q := New(4)
-			t.Errorf("%v", q.deck)
 			t.Errorf("Got %d card length, expected %d", len(d.deck), 54*1)
 		}
 	}
