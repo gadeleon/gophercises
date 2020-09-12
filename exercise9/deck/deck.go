@@ -14,9 +14,19 @@ type Card struct {
 
 type Deck struct {
 	deck []Card
-
 }
 
+func New(n int) Deck {
+
+	// Create a new standard deck
+	var d Deck
+	for i := 0; i < n; i++ {
+		c := NewStandard()
+		d.deck = append(c)
+	}
+
+	return d
+}
 
 // Create a func New to make a stroebought deck o' cards.
 // 52 cards + 2 joker in []card
@@ -36,21 +46,13 @@ func NewStandard() []Card {
 		// King
 		c = append(c, Card{suite: s, id: "13", value: 13})
 
-
-		// }
-		// c[s]= card{id:11}
-		// c[s]= card{id:11}
-		// c[s]= card{id:11}
-
 	}
 	c = append(c, Card{suite: "j", id: "0", value: 0})
 	c = append(c, Card{suite: "J", id: "0", value: 0})
 
-	//var d Deck
-	//d = Deck{c}
-
 	return c
 }
+
 // TODO: Update New() to return a deck rather than just dem cards
 // TODO: Add Sort Deck Method
 // func (d *Deck) Sort() Deck {}

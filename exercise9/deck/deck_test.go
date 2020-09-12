@@ -4,16 +4,18 @@ import (
 	"testing"
 )
 
+//// Test creation of arbitrary count of decks
+func TestNew(t *testing.T) {
 
-
-//// Test creation of arbitrary count of cards, normal deck
-//// Future proofing for different sizes
-//func TestNewDeckLength(t *testing.T) {
-//	d := NewStandard(54)
-//	if len(d.deck) != d.count {
-//		t.Errorf("Got %d card length, expected %d", len(d.deck), d.count)
-//	}
-//}
+	for i := 0; i < 4; i++ {
+		d := New(i)
+		if len(d.deck) != (54 * i) {
+			q := New(4)
+			t.Errorf("%v", q.deck)
+			t.Errorf("Got %d card length, expected %d", len(d.deck), 54*1)
+		}
+	}
+}
 
 // Test 13 of each suite & 2 Jokers,  AKA normal deck
 func TestNewDeckSuite(t *testing.T) {
