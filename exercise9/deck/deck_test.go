@@ -41,3 +41,13 @@ func TestNewDeckSuite(t *testing.T) {
 		t.Errorf("Got %d joker, want 1", c["J"])
 	}
 }
+
+// Sort Test, Just printing out.
+func TestDeckSort(t *testing.T) {
+	d := New(1)
+	//d.deck[0].value
+	t.Errorf("%v", d.deck)
+	t.Errorf("YOOOOOOOOOOOOOOOOOOOOO")
+	d.Sort()
+	t.Errorf("%v", d.deck)
+}

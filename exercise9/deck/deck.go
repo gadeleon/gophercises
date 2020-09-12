@@ -3,6 +3,7 @@ package deck
 // Create a Card Type
 import (
 	"fmt"
+	"sort"
 )
 
 // Note for me, J - 11, Q - 12, K - 13
@@ -15,12 +16,9 @@ type Card struct {
 type Deck struct {
 	deck []Card
 }
-
+// Make N number of decks
 func New(n int) Deck {
-
-	// Create a new standard deck
 	var d Deck
-
 
 	for i := 0; i < n; i++ {
 		c := NewStandard()
@@ -54,8 +52,14 @@ func NewStandard() []Card {
 	return c
 }
 
-// TODO: Update New() to return a deck rather than just dem cards
-// TODO: Add Sort Deck Method
+func (d Deck) Sort() {
+	sort.SliceStable(d.deck, func(i, j int) bool {
+		return d.deck[i].value < d.deck[j].value
+	})
+}
+// TODO: Add a way to Sort by Suite (id) instead of value
+
+
 // func (d *Deck) Sort() Deck {}
 // TODO: "A default comparison function that can
 // be used with the sorting option." (Wat?)
