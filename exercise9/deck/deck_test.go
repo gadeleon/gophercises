@@ -1,6 +1,7 @@
 package deck
 
 import (
+	"math/rand"
 	"testing"
 )
 
@@ -57,9 +58,16 @@ func TestDeckSort(t *testing.T) {
 }
 
 func TestDeckShuffle(t *testing.T) {
+	// We want deterministic testing for tests.
+	// Explicit declaration of seed 1 even though default
+	rand.Seed(1)
+	// Generate 1 deck
 	d := New(1)
-	t.Error(d.deck)
+	// Shuffle
 	d.Shuffle()
-	t.Error(d.deck)
+	exp := Card{"S", "7", 7}
+	if d.deck[0] != exp {
+		t.Errorf("Got %v, expected %v", d.deck[0], exp)
+	}
 
 }

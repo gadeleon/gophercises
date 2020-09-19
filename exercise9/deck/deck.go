@@ -61,6 +61,8 @@ func (d Deck) Sort() {
 }
 
 func (d Deck) Shuffle() {
+	// TODO: Figure out, where we init the seed
+	// in the general case.
 	rand.Shuffle(len(d.deck), func(i, j int){
 		d.deck[i], d.deck[j] = d.deck[j], d.deck[i]
 	})
