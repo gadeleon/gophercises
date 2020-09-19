@@ -3,6 +3,7 @@ package deck
 // Create a Card Type
 import (
 	"fmt"
+	"math/rand"
 	"sort"
 )
 
@@ -56,6 +57,12 @@ func NewStandard() []Card {
 func (d Deck) Sort() {
 	sort.SliceStable(d.deck, func(i, j int) bool {
 		return d.deck[i].suite < d.deck[j].suite
+	})
+}
+
+func (d Deck) Shuffle() {
+	rand.Shuffle(len(d.deck), func(i, j int){
+		d.deck[i], d.deck[j] = d.deck[j], d.deck[i]
 	})
 }
 

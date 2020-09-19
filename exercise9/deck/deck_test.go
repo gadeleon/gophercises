@@ -55,3 +55,11 @@ func TestDeckSort(t *testing.T) {
 	}
 
 }
+
+func TestDeckShuffle(t *testing.T) {
+	d := New(1)
+	t.Error(d.deck)
+	d.Shuffle()
+	t.Error(d.deck)
+
+}
