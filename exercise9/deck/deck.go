@@ -89,7 +89,4 @@ func (d *Deck) AddJokers(J, j int) error {
 
 // TODO: Add a way to Sort by Suite (id) instead of value
 
-// func (d *Deck) Sort() Deck {}
-// TODO: "A default comparison function that can
-// be used with the sorting option." (Wat?)
-// TODO: Add Shuffle Method
+// TODO: Add filter out specific cards from Deck.
