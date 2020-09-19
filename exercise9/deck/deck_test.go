@@ -71,3 +71,30 @@ func TestDeckShuffle(t *testing.T) {
 	}
 
 }
+
+func TestNewDeckJokers(t *testing.T) {
+	d := New(1)
+	err := d.AddJokers(1, 1)
+
+	// Sort the deck into suites
+	c := make(map[string]int, len(d.deck))
+	for _, j := range d.deck {
+		c[j.suite]++
+	}
+
+	if c["J"] != 2 {
+		t.Errorf("Got %d JOKER, want 2", c["J"])
+	}
+	if c["j"] != 2 {
+		t.Errorf("Got %d joker, want 2", c["J"])
+	}
+
+	// Check for negative # of jokers.
+	err = d.AddJokers(-1, 1)
+	if err != nil {
+		return
+	} else {
+		t.Errorf("Expected  got %v", err)
+	}
+
+}

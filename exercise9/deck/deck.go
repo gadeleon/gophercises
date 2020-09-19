@@ -2,6 +2,7 @@ package deck
 
 // Create a Card Type
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 	"sort"
@@ -33,6 +34,7 @@ func New(n int) Deck {
 // 52 cards + 2 joker in []card
 // FIXME: Return Deck struct
 func NewStandard() []Card {
+
 	var c []Card
 	suites := []string{"H", "S", "C", "D"}
 	for _, s := range suites {
@@ -50,7 +52,6 @@ func NewStandard() []Card {
 	}
 	c = append(c, Card{suite: "j", id: "0", value: 0})
 	c = append(c, Card{suite: "J", id: "0", value: 0})
-
 	return c
 }
 
@@ -63,9 +64,27 @@ func (d Deck) Sort() {
 func (d Deck) Shuffle() {
 	// TODO: Figure out, where we init the seed
 	// in the general case.
-	rand.Shuffle(len(d.deck), func(i, j int){
+	rand.Shuffle(len(d.deck), func(i, j int) {
 		d.deck[i], d.deck[j] = d.deck[j], d.deck[i]
 	})
+}
+
+func (d *Deck) AddJokers(J, j int) error {
+	// Make sure J and j are positive.
+	if j < 0 || J < 0 {
+		return errors.New("donuts")
+	}
+
+	for i := 0; i < j; i++ {
+		d.deck = append(d.deck, Card{suite: "j", id: "0", value: 0})
+	}
+
+	for i := 0; i < J; i++ {
+		d.deck = append(d.deck, Card{suite: "J", id: "0", value: 0})
+	}
+
+	return nil
+
 }
 
 // TODO: Add a way to Sort by Suite (id) instead of value
