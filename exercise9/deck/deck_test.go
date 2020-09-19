@@ -44,10 +44,14 @@ func TestNewDeckSuite(t *testing.T) {
 
 // Sort Test, Just printing out.
 func TestDeckSort(t *testing.T) {
+	// Generate deck
 	d := New(1)
-	//d.deck[0].value
-	t.Errorf("%v", d.deck)
-	t.Errorf("YOOOOOOOOOOOOOOOOOOOOO")
+	c1 := Card{"C", "0", 0}
 	d.Sort()
-	t.Errorf("%v", d.deck)
+
+	if d.deck[0] != c1 {
+		t.Errorf("Got %v expected %v ", d.deck[0], c1)
+
+	}
+
 }

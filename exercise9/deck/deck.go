@@ -16,6 +16,7 @@ type Card struct {
 type Deck struct {
 	deck []Card
 }
+
 // Make N number of decks
 func New(n int) Deck {
 	var d Deck
@@ -54,11 +55,11 @@ func NewStandard() []Card {
 
 func (d Deck) Sort() {
 	sort.SliceStable(d.deck, func(i, j int) bool {
-		return d.deck[i].value < d.deck[j].value
+		return d.deck[i].suite < d.deck[j].suite
 	})
 }
-// TODO: Add a way to Sort by Suite (id) instead of value
 
+// TODO: Add a way to Sort by Suite (id) instead of value
 
 // func (d *Deck) Sort() Deck {}
 // TODO: "A default comparison function that can
