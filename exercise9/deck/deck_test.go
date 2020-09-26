@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+
 //// Test creation of arbitrary count of decks
 func TestNew(t *testing.T) {
 
@@ -95,6 +96,25 @@ func TestNewDeckJokers(t *testing.T) {
 		return
 	} else {
 		t.Errorf("Expected  got %v", err)
+	}
+
+}
+func TestFilterCard(t *testing.T) {
+	d := New(2)
+	oglen := len(d.deck)
+	// Card we want to filter out
+	filtered := Card{"H", "2", 2}
+	d.FilterCard(filtered)
+
+	for _, j := range d.deck {
+		if j == filtered {
+			t.Errorf("%v found, should not be in slice", filtered)
+		}
+	}
+	// Check to see all other expected cards are present
+	total := len(d.deck)
+	if total == oglen {
+		t.Errorf("Original length is %v, should be less than %v", oglen, total)
 	}
 
 }

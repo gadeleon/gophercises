@@ -87,6 +87,14 @@ func (d *Deck) AddJokers(J, j int) error {
 
 }
 
-// TODO: Add a way to Sort by Suite (id) instead of value
+func (d *Deck) FilterCard(c Card) error {
+	// a = append(a[:i], a[i+1:]...)
+	for i , j := range d.deck {
+		if j == c {
+			d.deck = append(d.deck[:i], d.deck[i+1:]...)
+		}
+	}
+	return nil
+}
 
 // TODO: Add filter out specific cards from Deck.
