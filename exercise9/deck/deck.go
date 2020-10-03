@@ -61,6 +61,13 @@ func NewStandard(opts ...func([]Card) []Card) []Card {
 	return c
 }
 
+func cSort(c []Card) []Card {
+	sort.SliceStable(c, func(i, j int) bool {
+		return c[i].suite < c[j].suite
+	})
+	return c
+}
+
 func (d Deck) Sort() {
 	sort.SliceStable(d.deck, func(i, j int) bool {
 		return d.deck[i].suite < d.deck[j].suite

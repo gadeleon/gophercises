@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 //// Test creation of arbitrary count of decks
 func TestNew(t *testing.T) {
 
@@ -53,6 +52,19 @@ func TestDeckSort(t *testing.T) {
 
 	if d.deck[0] != c1 {
 		t.Errorf("Got %v expected %v ", d.deck[0], c1)
+
+	}
+
+}
+
+func TestfoDeckSort(t *testing.T) {
+	// Generate deck
+
+	d := NewStandard(cSort)
+	c1 := Card{"C", "0", 0}
+
+	if d[0] != c1 {
+		t.Errorf("Got %v expected %v ", d[0], c1)
 
 	}
 
