@@ -32,8 +32,9 @@ func New(n int) Deck {
 
 // Create a func New to make a store-bought deck o' cards.
 // 52 cards + 2 joker in []card
-// FIXME: Return Deck struct
-func NewStandard() []Card {
+
+// add a function argument of options
+func NewStandard(opts ...func([]Card) []Card) []Card {
 
 	var c []Card
 	suites := []string{"H", "S", "C", "D"}
@@ -52,6 +53,11 @@ func NewStandard() []Card {
 	}
 	c = append(c, Card{suite: "j", id: "0", value: 0})
 	c = append(c, Card{suite: "J", id: "0", value: 0})
+
+	for _, opt := range opts {
+		c = opt(c)
+	}
+
 	return c
 }
 
@@ -89,7 +95,7 @@ func (d *Deck) AddJokers(J, j int) error {
 
 func (d *Deck) FilterCard(c Card) error {
 	// a = append(a[:i], a[i+1:]...)
-	for i , j := range d.deck {
+	for i, j := range d.deck {
 		if j == c {
 			d.deck = append(d.deck[:i], d.deck[i+1:]...)
 		}
