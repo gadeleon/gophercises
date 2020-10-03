@@ -8,16 +8,45 @@ import (
 	"sort"
 )
 
-// Note for me, J - 11, Q - 12, K - 13
-type Card struct {
-	suite string
-	id    string
-	value int
+// Refactor for card type
+type Cards struct {
+	type Suit
+	type Rank
 }
 
-type Deck struct {
-	deck []Card
-}
+type Suit uint8
+
+const (
+	Spade Suit = iota
+	Diamond
+	Club
+	Heart
+	Joker
+)
+
+type Rank uint8
+
+const (
+	_ Rank = iota
+	Ace
+	Two
+	Three
+	Four
+	Five
+	Six
+	Seven
+	Eight
+	Nine
+	Ten
+	Jack
+	Queen
+	King
+)
+
+// Deprecated
+//type Deck struct {
+//	deck []Card
+//}
 
 // Make N number of decks
 func New(n int) Deck {
