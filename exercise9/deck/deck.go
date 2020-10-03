@@ -44,6 +44,9 @@ const (
 	maxRank = King
 )
 
+func absRank(cards Cards) int {
+	return int(cards.Suit) * int(maxRank) + int(cards.Rank)
+}
 // Deprecated
 //type Deck struct {
 //	deck []Cards
@@ -82,7 +85,8 @@ func New(opts ...func([]Cards) []Cards) []Cards {
 
 	return c
 }
-//
+
+// suit * maxRank + Rank
 //func cSort(c []Cards) []Cards {
 //	sort.SliceStable(c, func(i, j int) bool {
 //		return c[i].suite < c[j].suite

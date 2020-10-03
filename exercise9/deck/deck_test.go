@@ -13,6 +13,22 @@ func TestNew(t *testing.T) {
 	}
 
 }
+
+func TestAbsRank(t *testing.T) {
+	c1 := Cards{Spade, Jack}
+	c2 := Cards{Suit: Diamond, Rank: Six }
+	c3 := Cards{Suit: Club, Rank: Ace}
+	c4 := Cards{Suit: Heart, Rank: Four}
+	var vals = [...]Cards{c1,c2,c3,c4}
+	for _, card := range vals {
+		abs := absRank(card)
+		exp := int(card.Suit) * int(maxRank) + int(card.Rank)
+		if abs != exp {
+			t.Errorf("Got %d for %v, want %d", abs, card, exp)
+		}
+	}
+
+}
 //
 //// Test 13 of each suite & 2 Jokers,  AKA normal deck
 //func TestNewDeckSuite(t *testing.T) {
