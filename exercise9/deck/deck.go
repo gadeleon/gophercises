@@ -107,6 +107,9 @@ func Sort(c []Cards) []Cards {
 	return c
 }
 
+func AddJokers(c []Cards, j int) [] Cards {
+	return c
+}
 //
 //
 //func (d *Deck) AddJokers(J, j int) error {

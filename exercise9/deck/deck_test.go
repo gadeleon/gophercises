@@ -65,6 +65,13 @@ func TestSort(t *testing.T) {
 	}
 }
 
+func TestAddJokers(t *testing.T) {
+// d.Suit != 4
+	d := New(AddJokers, 5)
+	t.Error(d)
+
+}
+
 //
 //// Test 13 of each suite & 2 Jokers,  AKA normal deck
 //func TestNewDeckSuite(t *testing.T) {
