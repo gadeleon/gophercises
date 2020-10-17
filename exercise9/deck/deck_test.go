@@ -66,9 +66,15 @@ func TestSort(t *testing.T) {
 }
 
 func TestAddJokers(t *testing.T) {
-// d.Suit != 4
-	d := New(AddJokers, 5)
-	t.Error(d)
+	jokers := 4
+	d := New(AddJokers(jokers))
+	// Get last 4 cards
+	last := d[len(d)-(jokers):]
+	for _, v := range last {
+		if v.Suit != 4 {
+			t.Errorf("Got %v expected {4, X}", v)
+		}
+	}
 
 }
 

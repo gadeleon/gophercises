@@ -107,8 +107,12 @@ func Sort(c []Cards) []Cards {
 	return c
 }
 
-func AddJokers(c []Cards, j int) [] Cards {
-	return c
+func AddJokers(n int) func([]Cards) []Cards {
+	return func(c []Cards) []Cards {
+		// Here we add the actual adding of cards
+		return c
+
+	}
 }
 //
 //
