@@ -55,6 +55,18 @@ func TestShuffle(t *testing.T) {
 	}
 }
 
+func TestSort(t *testing.T) {
+	// Semi-deterministic seed
+	d := New(Shuffle)
+	d = Sort(d)
+
+	e := New()
+	result := EqualCards(d, e)
+	if result != true {
+		t.Errorf("Got %v, want true", result)
+	}
+}
+
 //
 //// Test 13 of each suite & 2 Jokers,  AKA normal deck
 //func TestNewDeckSuite(t *testing.T) {

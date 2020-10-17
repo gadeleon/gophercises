@@ -2,6 +2,7 @@ package deck
 
 import (
 	"math/rand"
+	"sort"
 	"time"
 )
 
@@ -55,22 +56,6 @@ func absRank(cards Cards) int {
 	return int(cards.Suit)*int(maxRank) + int(cards.Rank)
 }
 
-// Deprecated
-//type Deck struct {
-//	deck []Cards
-//}
-
-//// Make N number of decks
-//func New(n int) Deck {
-//	var d Deck
-//
-//	for i := 0; i < n; i++ {
-//		c := NewStandard()
-//		d.deck = append(d.deck, c...)
-//	}
-//	return d
-//}
-
 // Create a func New to make a store-bought deck o' cards.
 // 52 cards + 2 joker in []Cards
 
@@ -115,19 +100,14 @@ func Shuffle(c []Cards) []Cards {
 //	return c
 //}
 //
-//func (d Deck) Sort() {
-//	sort.SliceStable(d.deck, func(i, j int) bool {
-//		return d.deck[i].suite < d.deck[j].suite
-//	})
-//}
+func Sort(c []Cards) []Cards {
+	sort.SliceStable(c, func(i, j int) bool {
+		return absRank(c[i]) < absRank(c[j])
+	})
+	return c
+}
+
 //
-//func (d Deck) Shuffle() {
-//	// TODO: Figure out, where we init the seed
-//	// in the general case.
-//	rand.Shuffle(len(d.deck), func(i, j int) {
-//		d.deck[i], d.deck[j] = d.deck[j], d.deck[i]
-//	})
-//}
 //
 //func (d *Deck) AddJokers(J, j int) error {
 //	// Make sure J and j are positive.
