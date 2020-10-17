@@ -110,10 +110,14 @@ func Sort(c []Cards) []Cards {
 func AddJokers(n int) func([]Cards) []Cards {
 	return func(c []Cards) []Cards {
 		// Here we add the actual adding of cards
+		for i := 0; i <= n; i++ {
+			c = append(c, Cards{Suit: 4, Rank: 0})
+		}
 		return c
 
 	}
 }
+
 //
 //
 //func (d *Deck) AddJokers(J, j int) error {

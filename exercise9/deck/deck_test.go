@@ -69,6 +69,7 @@ func TestAddJokers(t *testing.T) {
 	jokers := 4
 	d := New(AddJokers(jokers))
 	// Get last 4 cards
+	// t.Errorf("%v", d)
 	last := d[len(d)-(jokers):]
 	for _, v := range last {
 		if v.Suit != 4 {
