@@ -46,7 +46,6 @@ func TestAbsRank(t *testing.T) {
 }
 
 func TestShuffle(t *testing.T) {
-	// Semi-deterministic seed
 	d := New(Shuffle)
 	e := New()
 	result := EqualCards(d, e)
