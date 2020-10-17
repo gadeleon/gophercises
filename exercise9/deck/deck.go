@@ -119,25 +119,6 @@ func AddJokers(n int) func([]Cards) []Cards {
 }
 
 //
-//
-//func (d *Deck) AddJokers(J, j int) error {
-//	// Make sure J and j are positive.
-//	if j < 0 || J < 0 {
-//		return errors.New("donuts")
-//	}
-//
-//	for i := 0; i < j; i++ {
-//		d.deck = append(d.deck, Cards{suite: "j", id: "0", value: 0})
-//	}
-//
-//	for i := 0; i < J; i++ {
-//		d.deck = append(d.deck, Cards{suite: "J", id: "0", value: 0})
-//	}
-//
-//	return nil
-//
-//}
-//
 //func (d *Deck) FilterCard(c Card) error {
 //	// a = append(a[:i], a[i+1:]...)
 //	for i, j := range d.deck {
