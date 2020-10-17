@@ -1,7 +1,7 @@
 package deck
 
 import (
-	"fmt"
+	// "fmt"
 	"math/rand"
 	"testing"
 )
@@ -25,20 +25,20 @@ func EqualCards(a, b []Cards) bool {
 func TestNew(t *testing.T) {
 	d := New()
 	if len(d) != 52 {
-		t.Errorf("Got %d cards, want %s",len(d), "52")
+		t.Errorf("Got %d cards, want %s", len(d), "52")
 	}
 
 }
 
 func TestAbsRank(t *testing.T) {
 	c1 := Cards{Spade, Jack}
-	c2 := Cards{Suit: Diamond, Rank: Six }
+	c2 := Cards{Suit: Diamond, Rank: Six}
 	c3 := Cards{Suit: Club, Rank: Ace}
 	c4 := Cards{Suit: Heart, Rank: Four}
-	var vals = [...]Cards{c1,c2,c3,c4}
+	var vals = [...]Cards{c1, c2, c3, c4}
 	for _, card := range vals {
 		abs := absRank(card)
-		exp := int(card.Suit) * int(maxRank) + int(card.Rank)
+		exp := int(card.Suit)*int(maxRank) + int(card.Rank)
 		if abs != exp {
 			t.Errorf("Got %d for %v, want %d", abs, card, exp)
 		}
@@ -51,9 +51,8 @@ func TestShuffle(t *testing.T) {
 	rand.Seed(1)
 	d := New(Shuffle)
 	e := New()
-	fmt.Sprintf("%v",e)
-	result := EqualCards(d, d)
-	if result != true {
+	result := EqualCards(d, e)
+	if result != false {
 		t.Errorf("Got %v, want false", result)
 	}
 }
