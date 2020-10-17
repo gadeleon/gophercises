@@ -1,9 +1,8 @@
 package deck
 
 import (
-	"time"
 	"math/rand"
-
+	"time"
 )
 
 // Refactor for card type
@@ -44,15 +43,18 @@ const (
 	Queen
 	King
 )
+
 // We want to know the proper range of ranks
 const (
 	minRank = Ace
 	maxRank = King
 )
+
 // Take number values of cards and create math for sorting
 func absRank(cards Cards) int {
-	return int(cards.Suit) * int(maxRank) + int(cards.Rank)
+	return int(cards.Suit)*int(maxRank) + int(cards.Rank)
 }
+
 // Deprecated
 //type Deck struct {
 //	deck []Cards
@@ -75,6 +77,7 @@ func absRank(cards Cards) int {
 // Need range of suits to iterate for card declartion.
 // Think global
 var suits = [...]Suit{Spade, Diamond, Club, Heart}
+
 // add a function argument of options
 func New(opts ...func([]Cards) []Cards) []Cards {
 	var c []Cards
@@ -95,10 +98,14 @@ func New(opts ...func([]Cards) []Cards) []Cards {
 // Shuffle Cards
 // TY: https://stackoverflow.com/questions/12321133/how-to-properly-seed-random-number-generator?lastactivity
 func Shuffle(c []Cards) []Cards {
+	// Use time to generate random seed for each shuffle
 	rand.Seed(time.Now().UTC().UnixNano())
+	rand.Shuffle(len(c), func(i, j int) {
+		c[i], c[j] = c[j], c[i]
+	})
+
 	return c
 }
-
 
 // suit * maxRank + Rank
 //func cSort(c []Cards) []Cards {

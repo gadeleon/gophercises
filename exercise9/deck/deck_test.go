@@ -2,7 +2,6 @@ package deck
 
 import (
 	// "fmt"
-	"math/rand"
 	"testing"
 )
 
@@ -48,7 +47,6 @@ func TestAbsRank(t *testing.T) {
 
 func TestShuffle(t *testing.T) {
 	// Semi-deterministic seed
-	rand.Seed(1)
 	d := New(Shuffle)
 	e := New()
 	result := EqualCards(d, e)
