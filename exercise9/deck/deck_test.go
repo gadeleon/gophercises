@@ -1,8 +1,24 @@
 package deck
 
 import (
+	"fmt"
+	"math/rand"
 	"testing"
 )
+
+// EqualCards compares slices for us.
+// TY: https://yourbasic.org/golang/compare-slices/
+func EqualCards(a, b []Cards) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if absRank(v) != absRank(b[i]) {
+			return false
+		}
+	}
+	return true
+}
 
 // Test creation of arbitrary count of decks
 // Repurposed from old New!!
@@ -29,6 +45,19 @@ func TestAbsRank(t *testing.T) {
 	}
 
 }
+
+func TestShuffle(t *testing.T) {
+	// Semi-deterministic seed
+	rand.Seed(1)
+	d := New(Shuffle)
+	e := New()
+	fmt.Sprintf("%v",e)
+	result := EqualCards(d, d)
+	if result != true {
+		t.Errorf("Got %v, want false", result)
+	}
+}
+
 //
 //// Test 13 of each suite & 2 Jokers,  AKA normal deck
 //func TestNewDeckSuite(t *testing.T) {

@@ -1,5 +1,11 @@
 package deck
 
+import (
+	"time"
+	"math/rand"
+
+)
+
 // Refactor for card type
 type Cards struct {
 	Suit
@@ -43,7 +49,7 @@ const (
 	minRank = Ace
 	maxRank = King
 )
-
+// Take number values of cards and create math for sorting
 func absRank(cards Cards) int {
 	return int(cards.Suit) * int(maxRank) + int(cards.Rank)
 }
@@ -85,6 +91,14 @@ func New(opts ...func([]Cards) []Cards) []Cards {
 
 	return c
 }
+
+// Shuffle Cards
+// TY: https://stackoverflow.com/questions/12321133/how-to-properly-seed-random-number-generator?lastactivity
+func Shuffle(c []Cards) []Cards {
+	rand.Seed(time.Now().UTC().UnixNano())
+	return c
+}
+
 
 // suit * maxRank + Rank
 //func cSort(c []Cards) []Cards {
