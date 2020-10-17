@@ -56,7 +56,6 @@ func TestShuffle(t *testing.T) {
 }
 
 func TestSort(t *testing.T) {
-	// Semi-deterministic seed
 	d := New(Shuffle)
 	d = Sort(d)
 
