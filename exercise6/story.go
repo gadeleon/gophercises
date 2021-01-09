@@ -1,6 +1,6 @@
 package main
 
-var JSONblob = []byte(`[
+var JSONblob = []byte(`
 {
   "intro": {
     "title": "The Little Blue Gopher",
@@ -112,4 +112,4 @@ var JSONblob = []byte(`[
     ],
     "options": []
   }
-}]`)
+}`)
