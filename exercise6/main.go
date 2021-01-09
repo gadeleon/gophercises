@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	//"net/http"
+
 )
 
 //StoryJson JSON struct
@@ -21,5 +22,6 @@ type Option struct {
 
 func main() {
 	// PreProcess JSON
+	fmt.Println(JSONblob)
 
 }
