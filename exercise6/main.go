@@ -3,22 +3,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
 	//"net/http"
-
 )
 
 //StoryJson JSON struct
 type StoryJson struct {
 	StoryArc string
-
 }
 
 type StoryArc struct {
-	Title    string   `json:"title"`
-	Story    []string `json:"story"`
-	Options  []Option `json:"options"`
-
+	Title   string   `json:"title"`
+	Story   []string `json:"story"`
+	Options []Option `json:"options"`
 }
 
 //Option Story arc option
@@ -43,12 +39,10 @@ func parseStory(jdata []byte) (Story, error) {
 func main() {
 	// PreProcess JSON
 	//fmt.Println(JSONblob)
-	s,err := parseStory(JSONblob)
+	s, err := parseStory(JSONblob)
 	if err != nil {
 		fmt.Println("We has error", err)
 	}
 	fmt.Println(s)
-
-
 
 }
