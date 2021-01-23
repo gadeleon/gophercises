@@ -80,3 +80,5 @@ func main() {
 
 
 }
+// TODO: If there's no param, return intro, else, return storyarc
+// TODO: Rendor out arcs, turn them into links with arc as the key
