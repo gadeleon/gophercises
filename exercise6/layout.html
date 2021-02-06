@@ -1,3 +1,10 @@
 <h1>{{.Title}}</h1>
 
 <div>{{.Story}}</div>
+
+<ul>{{range $v := .Options}}
+        <li>
+            <a href="/?arc={{$v.Arc}}">{{$v.Text}}</a>
+        </li>
+    {{end}}
+</ul>

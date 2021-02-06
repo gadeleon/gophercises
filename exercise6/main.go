@@ -36,13 +36,9 @@ type HttpHandler struct{
 
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	tmpl := template.Must(template.ParseFiles("layout.html"))
-	// fmt.Println("Sup, world.")
-	// create response binary data
 	//data := []byte("Hello World!") // slice of bytes
 	fmt.Println("Handler called!")
-	//fmt.Fprint(res, h.Story)
-	// write `data` to response
-	//res.Write(data)
+	// Start at intro
 	tmpl.Execute(res, h.Story.Instances["intro"])
 
 }
