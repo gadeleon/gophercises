@@ -1,6 +1,9 @@
 <h1>{{.Title}}</h1>
 
-<div>{{.Story}}</div>
+<div>{{range .Story}}
+    {{.}}
+    {{end}}
+</div>
 
 <ul>{{range $v := .Options}}
         <li>

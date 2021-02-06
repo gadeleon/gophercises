@@ -33,19 +33,13 @@ type HttpHandler struct {
 
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	tmpl := template.Must(template.ParseFiles("layout.html"))
-	//data := []byte("Hello World!") // slice of bytes
 	p := req.URL.Query()
-	fmt.Println(p)
 	arc := p.Get("arc")
 	if arc == "" {
 		tmpl.Execute(res, h.Story.Instances["intro"])
 	} else {
 		tmpl.Execute(res, h.Story.Instances[arc])
 	}
-
-	// fmt.Println("Handler called!")
-	// // Start at intro
-	// tmpl.Execute(res, h.Story.Instances["intro"])
 
 }
 
@@ -54,7 +48,6 @@ func parseStory(jdata []byte) (Story, error) {
 	a := Story{}
 	err := json.Unmarshal(jdata, &a.Instances)
 	if err != nil {
-		// There is a better way to do this. Sorry.
 		return Story{}, err
 	}
 	return a, nil
@@ -62,14 +55,10 @@ func parseStory(jdata []byte) (Story, error) {
 func main() {
 
 	// PreProcess JSON
-	//fmt.Println(JSONblob)
 	s, err := parseStory(JSONblob)
 	if err != nil {
 		fmt.Println("We has error", err)
 	}
-	//fmt.Println(s)
-	// Establish template
-	// create a new handler
 	handler := HttpHandler{Story: s}
 	// listen and serve
 	fmt.Println("Running Server on 9777")
@@ -77,5 +66,7 @@ func main() {
 
 }
 
-// TODO: If there's no param, return intro, else, return storyarc
-// TODO: Rendor out arcs, turn them into links with arc as the key
+// TODO: Multiples stories
+// api support first choice for ken.
+// Resarts / quiting / nav
+// breadcrumbs
