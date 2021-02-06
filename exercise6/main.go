@@ -3,13 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-<<<<<<< HEAD
-	//"net/http"
-=======
 	"net/http"
 	"html/template"
 
->>>>>>> 5fe2e904adb5a0c2d48356781088b86be2e546c0
 )
 
 //StoryJson JSON struct

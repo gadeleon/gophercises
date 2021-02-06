@@ -11,13 +11,13 @@ func TestParseStory(t *testing.T) {
 	if title != "Visiting New York" {
 		t.Error("Got:", title, "expected:", "Visiting New York")
 	}
-	// Make Sure Len of options is correct
 	o := s.Instances["debate"].Options
 	ol := len(o)
+	// Debate has 3 options
 	expected := 3
 
 	if ol != expected {
-		t.Errorf("Got %d, Expected 3", ol)
+		t.Errorf("Got %d, Expected %d", ol, expected)
 	}
 
 }
