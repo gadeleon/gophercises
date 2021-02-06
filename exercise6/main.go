@@ -3,7 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+<<<<<<< HEAD
 	//"net/http"
+=======
+	"net/http"
+	"html/template"
+
+>>>>>>> 5fe2e904adb5a0c2d48356781088b86be2e546c0
 )
 
 //StoryJson JSON struct
@@ -26,6 +32,25 @@ type Story struct {
 	Instances map[string]StoryArc
 }
 
+type HttpHandler struct{
+	Story Story
+
+}
+
+
+func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	tmpl := template.Must(template.ParseFiles("layout.html"))
+	// fmt.Println("Sup, world.")
+	// create response binary data
+	//data := []byte("Hello World!") // slice of bytes
+	fmt.Println("Handler called!")
+	//fmt.Fprint(res, h.Story)
+	// write `data` to response
+	//res.Write(data)
+	tmpl.Execute(res, h.Story.Instances["intro"])
+
+}
+
 // Parse & unmarshal json of story struct
 func parseStory(jdata []byte) (Story, error) {
 	a := Story{}
@@ -37,12 +62,23 @@ func parseStory(jdata []byte) (Story, error) {
 	return a, nil
 }
 func main() {
+
 	// PreProcess JSON
 	//fmt.Println(JSONblob)
 	s, err := parseStory(JSONblob)
 	if err != nil {
 		fmt.Println("We has error", err)
 	}
-	fmt.Println(s)
+	//fmt.Println(s)
+	// Establish template
+	// create a new handler
+	handler := HttpHandler{Story: s}
+	// listen and serve
+	fmt.Println("Running Server on 9777")
+	http.ListenAndServe(":9777", handler)
+
+
 
 }
+// TODO: If there's no param, return intro, else, return storyarc
+// TODO: Rendor out arcs, turn them into links with arc as the key
