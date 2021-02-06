@@ -3,9 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"html/template"
-
+	"net/http"
 )
 
 //StoryJson JSON struct
@@ -37,11 +36,15 @@ type HttpHandler struct{
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	tmpl := template.Must(template.ParseFiles("layout.html"))
 	//data := []byte("Hello World!") // slice of bytes
+	p := req.URL.Query()
+	fmt.Println(p)
+
 	fmt.Println("Handler called!")
 	// Start at intro
 	tmpl.Execute(res, h.Story.Instances["intro"])
 
 }
+
 
 // Parse & unmarshal json of story struct
 func parseStory(jdata []byte) (Story, error) {
