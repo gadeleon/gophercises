@@ -27,24 +27,27 @@ type Story struct {
 	Instances map[string]StoryArc
 }
 
-type HttpHandler struct{
+type HttpHandler struct {
 	Story Story
-
 }
-
 
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	tmpl := template.Must(template.ParseFiles("layout.html"))
 	//data := []byte("Hello World!") // slice of bytes
 	p := req.URL.Query()
 	fmt.Println(p)
+	arc := p.Get("arc")
+	if arc == "" {
+		tmpl.Execute(res, h.Story.Instances["intro"])
+	} else {
+		tmpl.Execute(res, h.Story.Instances[arc])
+	}
 
-	fmt.Println("Handler called!")
-	// Start at intro
-	tmpl.Execute(res, h.Story.Instances["intro"])
+	// fmt.Println("Handler called!")
+	// // Start at intro
+	// tmpl.Execute(res, h.Story.Instances["intro"])
 
 }
-
 
 // Parse & unmarshal json of story struct
 func parseStory(jdata []byte) (Story, error) {
@@ -72,8 +75,7 @@ func main() {
 	fmt.Println("Running Server on 9777")
 	http.ListenAndServe(":9777", handler)
 
-
-
 }
+
 // TODO: If there's no param, return intro, else, return storyarc
 // TODO: Rendor out arcs, turn them into links with arc as the key
