@@ -1,4 +1,4 @@
 # gophercises
-Getting kindabad at golang
+Getting kindabad-ish at golang
 
 https://courses.calhoun.io/
