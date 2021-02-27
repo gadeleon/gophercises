@@ -68,5 +68,5 @@ func main() {
 
 // TODO: Multiples stories
 // api support first choice for ken.
-// Resarts / quiting / nav
-// breadcrumbs
+// Resarts / quiting / nav / startover button when finished
+// breadcrumbs - adding previous & forward options.
