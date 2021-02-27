@@ -31,6 +31,10 @@ type HttpHandler struct {
 	Story Story
 }
 
+type Index struct {
+	Stories []byte
+}
+
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	tmpl := template.Must(template.ParseFiles("layout.html"))
 	p := req.URL.Query()
@@ -41,6 +45,10 @@ func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		tmpl.Execute(res, h.Story.Instances[arc])
 	}
 
+}
+// Parse multiple stories accepts a story
+func parseStories(jdata []byte) (Index, error) {
+	return Index{}, nil
 }
 
 // Parse & unmarshal json of story struct
