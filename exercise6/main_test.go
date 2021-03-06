@@ -7,13 +7,16 @@ import (
 
 
 func TestGetFileNameList(t *testing.T) {
-
-	expected := []string{"story01.json"}
-	actual, _ := getFileNameList(".")
+	// TODO: at some point mock the directory
+	// TODO: Fix error case (by letting user specify path)
+	expected := []string{"gopher.json","story01.json"}
+	actual, _ := getFileNameList()
 
 	if !Equal(expected,actual)  {
 		t.Errorf("Got %v, Wanted %v", actual, expected)
 	}
+	// Test On Directory Doesn't Exist /bottomdollar
+	//_, err := getFileNameList()
 }
 //func TestParseStory(t *testing.T) {
 //	s, _ := parseStory(JSONblob)

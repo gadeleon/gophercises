@@ -1,8 +1,11 @@
 package main
+
 import (
 	"io/ioutil"
 	"log"
-	"os")
+	"strings"
+)
+	//"os")
 
 
 
@@ -56,12 +59,18 @@ func getFileNameList() ([]string, error) {
 	files, err := ioutil.ReadDir("./")
 	if err != nil {
 		log.Fatal(err)
+		return []string{}, err
 	}
+	flist := []string{}
 
 	for _, f := range files {
-		fmt.Println(f.Name())
+		// TODO: Dangerous but we'll fix later (the period)
+		if strings.Contains(f.Name(), ".json") {
+			flist = append(flist, f.Name())
+
+		}
 	}
-	return []string{}, nil
+	return flist, nil
 }
 //func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 //	tmpl := template.Must(template.ParseFiles("layout.html"))
@@ -102,7 +111,9 @@ func getFileNameList() ([]string, error) {
 //
 //}
 //
-//// TODO: Multiples stories
 //// api support first choice for ken.
 //// Resarts / quiting / nav / startover button when finished
 //// breadcrumbs - adding previous & forward options.
+//// TODO: Make func to Read the files from getFileNameList()
+//// TODO: "Read" or next func after read tosses into Story Struct
+//// build list function, something something composition.
