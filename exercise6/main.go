@@ -1,11 +1,10 @@
 package main
-
 import (
-	"encoding/json"
-	"fmt"
-	"html/template"
-	"net/http"
-)
+	"io/ioutil"
+	"log"
+	"os")
+
+
 
 //StoryJson JSON struct
 type StoryJson struct {
@@ -35,46 +34,75 @@ type Index struct {
 	Stories []byte
 }
 
-func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	tmpl := template.Must(template.ParseFiles("layout.html"))
-	p := req.URL.Query()
-	arc := p.Get("arc")
-	if arc == "" {
-		tmpl.Execute(res, h.Story.Instances["intro"])
-	} else {
-		tmpl.Execute(res, h.Story.Instances[arc])
+func Equal(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
 	}
-
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
+	}
+	return true
 }
-// Parse multiple stories accepts a story
-func parseStories(jdata []byte) (Index, error) {
-	return Index{}, nil
-}
 
-// Parse & unmarshal json of story struct
-func parseStory(jdata []byte) (Story, error) {
-	a := Story{}
-	err := json.Unmarshal(jdata, &a.Instances)
+
+//TODO: Add path support.
+func getFileNameList() ([]string, error) {
+	//p,err  := os.Getwd()
+	//if err != nil {
+	//	log.Fatalf("Unable to list files at %s",p)
+	//}
+	files, err := ioutil.ReadDir("./")
 	if err != nil {
-		return Story{}, err
+		log.Fatal(err)
 	}
-	return a, nil
-}
-func main() {
 
-	// PreProcess JSON
-	s, err := parseStory(JSONblob)
-	if err != nil {
-		fmt.Println("We has error", err)
+	for _, f := range files {
+		fmt.Println(f.Name())
 	}
-	handler := HttpHandler{Story: s}
-	// listen and serve
-	fmt.Println("Running Server on 9777")
-	http.ListenAndServe(":9777", handler)
-
+	return []string{}, nil
 }
-
-// TODO: Multiples stories
-// api support first choice for ken.
-// Resarts / quiting / nav / startover button when finished
-// breadcrumbs - adding previous & forward options.
+//func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+//	tmpl := template.Must(template.ParseFiles("layout.html"))
+//	p := req.URL.Query()
+//	arc := p.Get("arc")
+//	if arc == "" {
+//		tmpl.Execute(res, h.Story.Instances["intro"])
+//	} else {
+//		tmpl.Execute(res, h.Story.Instances[arc])
+//	}
+//
+//}
+//// Parse multiple stories accepts a story
+//func parseStories(jdata []byte) (Index, error) {
+//	return Index{}, nil
+//}
+//
+//// Parse & unmarshal json of story struct
+//func parseStory(jdata []byte) (Story, error) {
+//	a := Story{}
+//	err := json.Unmarshal(jdata, &a.Instances)
+//	if err != nil {
+//		return Story{}, err
+//	}
+//	return a, nil
+//}
+//func main() {
+//
+//	// PreProcess JSON
+//	s, err := parseStory(JSONblob)
+//	if err != nil {
+//		fmt.Println("We has error", err)
+//	}
+//	handler := HttpHandler{Story: s}
+//	// listen and serve
+//	fmt.Println("Running Server on 9777")
+//	http.ListenAndServe(":9777", handler)
+//
+//}
+//
+//// TODO: Multiples stories
+//// api support first choice for ken.
+//// Resarts / quiting / nav / startover button when finished
+//// breadcrumbs - adding previous & forward options.
