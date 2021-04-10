@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -18,6 +19,8 @@ func TestGetFileNameList(t *testing.T) {
 	// Test On Directory Doesn't Exist /bottomdollar
 	//_, err := getFileNameList()
 }
+
+
 //func TestParseStory(t *testing.T) {
 //	s, _ := parseStory(JSONblob)
 //	title := s.Instances["new-york"].Title
@@ -53,3 +56,23 @@ func TestGetFileNameList(t *testing.T) {
 //		t.Errorf("Wanted %d got %d",expected, index)
 //	}
 //}
+
+func Test_ingestFile(t *testing.T) {
+	type args struct {
+		f string
+	}
+	tests := []struct {
+		name string
+		args args
+		want StoryJson
+	}{
+		{"Story01", args{"story01.json"}, StoryJson{ StoryArc {  "story",nil,nil} }  },
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ingestFile(tt.args.f); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ingestFile() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

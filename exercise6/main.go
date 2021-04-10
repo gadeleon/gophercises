@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 	//"os")
@@ -11,7 +13,7 @@ import (
 
 //StoryJson JSON struct
 type StoryJson struct {
-	StoryArc string
+	StoryArc StoryArc
 }
 
 type StoryArc struct {
@@ -71,6 +73,27 @@ func getFileNameList() ([]string, error) {
 		}
 	}
 	return flist, nil
+}
+
+func ingestFile(fn string) StoryJson {
+	f, err := os.Open(fn)
+	if err != nil {
+		log.Panic("Oh shit")
+	}
+	data := make([]byte,0)
+
+	//watch for this no :
+	_, err = f.Read(data)
+	story := StoryJson{}
+	err = json.Unmarshal(data,story)
+	return story
+
+
+
+
+
+	//return StoryJson{}
+
 }
 //func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 //	tmpl := template.Must(template.ParseFiles("layout.html"))
