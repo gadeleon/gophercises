@@ -1,24 +1,25 @@
 package main
 
 import (
+	"os"
 	"reflect"
 	"testing"
 )
 
 
 
-func TestGetFileNameList(t *testing.T) {
-	// TODO: at some point mock the directory
-	// TODO: Fix error case (by letting user specify path)
-	expected := []string{"gopher.json","story01.json"}
-	actual, _ := getFileNameList()
-
-	if !Equal(expected,actual)  {
-		t.Errorf("Got %v, Wanted %v", actual, expected)
-	}
-	// Test On Directory Doesn't Exist /bottomdollar
-	//_, err := getFileNameList()
-}
+//func TestGetFileNameList(t *testing.T) {
+//	// TODO: at some point mock the directory
+//	// TODO: Fix error case (by letting user specify path)
+//	expected := []string{"gopher.json","story01.json"}
+//	actual, _ := getFileNameList("./")
+//
+//	if !Equal(expected,actual)  {
+//		t.Errorf("Got %v, Wanted %v", actual, expected)
+//	}
+//	// Test On Directory Doesn't Exist /bottomdollar
+//	//_, err := getFileNameList()
+//}
 
 
 //func TestParseStory(t *testing.T) {
@@ -72,6 +73,35 @@ func Test_ingestFile(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ingestFile(tt.args.f); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("ingestFile() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_getFileNameList(t *testing.T) {
+	curdir,_ := os.Getwd()
+	type args struct {
+		p string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []string
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{"expected", args{curdir}, []string{"gopher.json","story01.json"}, false},
+
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := getFileNameList(tt.args.p)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("getFileNameList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getFileNameList() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

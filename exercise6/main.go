@@ -53,12 +53,12 @@ func Equal(a, b []string) bool {
 
 
 //TODO: Add path support.
-func getFileNameList() ([]string, error) {
+func getFileNameList(p string) ([]string, error) {
 	//p,err  := os.Getwd()
 	//if err != nil {
 	//	log.Fatalf("Unable to list files at %s",p)
 	//}
-	files, err := ioutil.ReadDir("./")
+	files, err := ioutil.ReadDir(p)
 	if err != nil {
 		log.Fatal(err)
 		return []string{}, err
@@ -68,6 +68,7 @@ func getFileNameList() ([]string, error) {
 	for _, f := range files {
 		// TODO: Dangerous but we'll fix later (the period)
 		if strings.Contains(f.Name(), ".json") {
+
 			flist = append(flist, f.Name())
 
 		}
