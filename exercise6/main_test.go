@@ -2,11 +2,10 @@ package main
 
 import (
 	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 )
-
-
 
 //func TestGetFileNameList(t *testing.T) {
 //	// TODO: at some point mock the directory
@@ -20,7 +19,6 @@ import (
 //	// Test On Directory Doesn't Exist /bottomdollar
 //	//_, err := getFileNameList()
 //}
-
 
 //func TestParseStory(t *testing.T) {
 //	s, _ := parseStory(JSONblob)
@@ -67,7 +65,7 @@ func Test_ingestFile(t *testing.T) {
 		args args
 		want StoryJson
 	}{
-		{"Story01", args{"story01.json"}, StoryJson{ StoryArc {  "story",nil,nil} }  },
+		{"Story01", args{"story01.json"}, StoryJson{StoryArc{"story", nil, nil}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -79,7 +77,7 @@ func Test_ingestFile(t *testing.T) {
 }
 
 func Test_getFileNameList(t *testing.T) {
-	curdir,_ := os.Getwd()
+	curdir, _ := os.Getwd()
 	type args struct {
 		p string
 	}
@@ -90,8 +88,11 @@ func Test_getFileNameList(t *testing.T) {
 		wantErr bool
 	}{
 		// TODO: Add test cases.
-		{"expected", args{curdir}, []string{"gopher.json","story01.json"}, false},
-
+		{"expected",
+			args{curdir},
+			[]string{filepath.Join(curdir,"gopher.json"),
+				filepath.Join(curdir,"story01.json")},
+			false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

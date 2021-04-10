@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 )
 	//"os")
@@ -68,8 +69,8 @@ func getFileNameList(p string) ([]string, error) {
 	for _, f := range files {
 		// TODO: Dangerous but we'll fix later (the period)
 		if strings.Contains(f.Name(), ".json") {
-
-			flist = append(flist, f.Name())
+			target := filepath.Join(p,f.Name())
+			flist = append(flist, target)
 
 		}
 	}
