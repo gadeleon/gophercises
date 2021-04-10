@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -10,7 +11,8 @@ import (
 )
 	//"os")
 
-
+// lolwat
+type Story map[string]StoryArc
 
 //StoryJson JSON struct
 type StoryJson struct {
@@ -28,7 +30,7 @@ type Option struct {
 	Text string `json:"text"`
 	Arc  string `json:"arc"`
 }
-type Story struct {
+type StoryMap struct {
 	Instances map[string]StoryArc
 }
 
@@ -77,17 +79,21 @@ func getFileNameList(p string) ([]string, error) {
 	return flist, nil
 }
 
-func ingestFile(fn string) StoryJson {
+func ingestFile(fn string) Story {
 	f, err := os.Open(fn)
+	fmt.Println(f)
 	if err != nil {
 		log.Panic("Oh shit")
 	}
-	data := make([]byte,0)
-
 	//watch for this no :
-	_, err = f.Read(data)
-	story := StoryJson{}
-	err = json.Unmarshal(data,story)
+	j := json.NewDecoder(f)
+	//byteValue, _ := ioutil.ReadAll(f)
+
+	var story Story
+	err = j.Decode(&story)
+	if err != nil {
+		log.Panic(err)
+	}
 	return story
 
 

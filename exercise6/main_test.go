@@ -57,6 +57,7 @@ import (
 //}
 
 func Test_ingestFile(t *testing.T) {
+	curdir, _ := os.Getwd()
 	type args struct {
 		f string
 	}
@@ -65,7 +66,9 @@ func Test_ingestFile(t *testing.T) {
 		args args
 		want StoryJson
 	}{
-		{"Story01", args{"story01.json"}, StoryJson{StoryArc{"story", nil, nil}}},
+		{"Story01",
+			args{filepath.Join(curdir, "story01.json")},
+			StoryJson{StoryArc{"story", nil, nil}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -90,8 +93,8 @@ func Test_getFileNameList(t *testing.T) {
 		// TODO: Add test cases.
 		{"expected",
 			args{curdir},
-			[]string{filepath.Join(curdir,"gopher.json"),
-				filepath.Join(curdir,"story01.json")},
+			[]string{filepath.Join(curdir, "gopher.json"),
+				filepath.Join(curdir, "story01.json")},
 			false},
 	}
 	for _, tt := range tests {
