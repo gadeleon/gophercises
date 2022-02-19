@@ -6,7 +6,11 @@ type Question struct {
 }
 
 type Quiz struct {
+	Source    string
 	Questions []Question
-	result    bool
 	Score     int
 }
+
+// Open CSV File
+// Create Quiz with Questions
+// Go through Quiz.Questions, and ask Question. Score ++ if correct
